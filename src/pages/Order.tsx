@@ -19,6 +19,7 @@ import Textarea from "@/components/Textarea";
 
 interface FileState {
   name: string;
+  file: File;
 }
 
 function Order() {
@@ -160,7 +161,7 @@ function Order() {
     if (e.target.files?.[0]) {
       const file = e.target.files[0];
       console.log('Selected File:', file);
-      setSelectedFile({ name: file.name });
+      setSelectedFile({ file, name: file.name }); // Ensure `file` is stored
     }
   };
 
@@ -168,8 +169,19 @@ function Order() {
 
   const { mutate: deliverOrder, isLoading: isDelivering } = useMutation({
     mutationFn: async () => {
-      console.log('Completing order:', orderId);
-      const response = await axiosPrivate.patch(`/order/${orderId}/ordercomplete`);
+      if (!selectedFile?.file) {
+        throw new Error("No file selected for upload.");
+      }
+  
+      const formData = new FormData();
+      formData.append('files', selectedFile.file); 
+  
+      console.log('Completing order with file:', selectedFile.name);
+      const response = await axiosPrivate.patch(`/order/${orderId}/ordercomplete`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       console.log('Order completion response:', response.data);
       return response.data;
     },

@@ -277,7 +277,7 @@ function Order() {
 
   const { mutate: submitDispute } = useMutation({
     mutationFn: async () => {
-      const response = await axiosPrivate.post('/dispute/createDispute', {
+      const response = await axiosPrivate.post('/createDispute', {
         orderId,
         reason: disputeReason
       });

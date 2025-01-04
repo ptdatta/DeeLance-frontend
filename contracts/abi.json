@@ -1,0 +1,999 @@
+{
+   "DeelancePlatformABI": [
+      {
+         "inputs": [],
+         "stateMutability": "nonpayable",
+         "type": "constructor"
+      },
+      {
+         "inputs": [],
+         "name": "AccessControlBadConfirmation",
+         "type": "error"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "address",
+               "name": "account",
+               "type": "address"
+            },
+            {
+               "internalType": "bytes32",
+               "name": "neededRole",
+               "type": "bytes32"
+            }
+         ],
+         "name": "AccessControlUnauthorizedAccount",
+         "type": "error"
+      },
+      {
+         "inputs": [],
+         "name": "EnforcedPause",
+         "type": "error"
+      },
+      {
+         "inputs": [],
+         "name": "ExpectedPause",
+         "type": "error"
+      },
+      {
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "gigId",
+               "type": "uint256"
+            }
+         ],
+         "name": "DisputeRaised",
+         "type": "event"
+      },
+      {
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "gigId",
+               "type": "uint256"
+            },
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "platformFeeFromBuyer",
+               "type": "uint256"
+            },
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "platformFeeFromSeller",
+               "type": "uint256"
+            },
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "sellerAmount",
+               "type": "uint256"
+            }
+         ],
+         "name": "DisputeResolved",
+         "type": "event"
+      },
+      {
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "jobId",
+               "type": "uint256"
+            }
+         ],
+         "name": "GigApproved",
+         "type": "event"
+      },
+      {
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "gigId",
+               "type": "uint256"
+            }
+         ],
+         "name": "GigCompleted",
+         "type": "event"
+      },
+      {
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "gigId",
+               "type": "uint256"
+            },
+            {
+               "indexed": false,
+               "internalType": "address",
+               "name": "buyer",
+               "type": "address"
+            },
+            {
+               "indexed": false,
+               "internalType": "address",
+               "name": "seller",
+               "type": "address"
+            },
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "amount",
+               "type": "uint256"
+            },
+            {
+               "indexed": false,
+               "internalType": "bool",
+               "name": "buyerIsNFTHolder",
+               "type": "bool"
+            },
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "deadline",
+               "type": "uint256"
+            },
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "revisionCount",
+               "type": "uint256"
+            }
+         ],
+         "name": "GigCreated",
+         "type": "event"
+      },
+      {
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "jobId",
+               "type": "uint256"
+            }
+         ],
+         "name": "GigRejected",
+         "type": "event"
+      },
+      {
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "jobId",
+               "type": "uint256"
+            }
+         ],
+         "name": "GigWithdrawn",
+         "type": "event"
+      },
+      {
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "taskId",
+               "type": "uint256"
+            },
+            {
+               "indexed": false,
+               "internalType": "address",
+               "name": "company",
+               "type": "address"
+            },
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "bounty",
+               "type": "uint256"
+            }
+         ],
+         "name": "OpenTaskCreated",
+         "type": "event"
+      },
+      {
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": false,
+               "internalType": "address",
+               "name": "account",
+               "type": "address"
+            }
+         ],
+         "name": "Paused",
+         "type": "event"
+      },
+      {
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "gigId",
+               "type": "uint256"
+            }
+         ],
+         "name": "RefundClaimed",
+         "type": "event"
+      },
+      {
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "gigId",
+               "type": "uint256"
+            }
+         ],
+         "name": "RevisionCompleted",
+         "type": "event"
+      },
+      {
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "gigId",
+               "type": "uint256"
+            }
+         ],
+         "name": "RevisionRequested",
+         "type": "event"
+      },
+      {
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": true,
+               "internalType": "bytes32",
+               "name": "role",
+               "type": "bytes32"
+            },
+            {
+               "indexed": true,
+               "internalType": "bytes32",
+               "name": "previousAdminRole",
+               "type": "bytes32"
+            },
+            {
+               "indexed": true,
+               "internalType": "bytes32",
+               "name": "newAdminRole",
+               "type": "bytes32"
+            }
+         ],
+         "name": "RoleAdminChanged",
+         "type": "event"
+      },
+      {
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": true,
+               "internalType": "bytes32",
+               "name": "role",
+               "type": "bytes32"
+            },
+            {
+               "indexed": true,
+               "internalType": "address",
+               "name": "account",
+               "type": "address"
+            },
+            {
+               "indexed": true,
+               "internalType": "address",
+               "name": "sender",
+               "type": "address"
+            }
+         ],
+         "name": "RoleGranted",
+         "type": "event"
+      },
+      {
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": true,
+               "internalType": "bytes32",
+               "name": "role",
+               "type": "bytes32"
+            },
+            {
+               "indexed": true,
+               "internalType": "address",
+               "name": "account",
+               "type": "address"
+            },
+            {
+               "indexed": true,
+               "internalType": "address",
+               "name": "sender",
+               "type": "address"
+            }
+         ],
+         "name": "RoleRevoked",
+         "type": "event"
+      },
+      {
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "taskId",
+               "type": "uint256"
+            },
+            {
+               "indexed": false,
+               "internalType": "address",
+               "name": "winner",
+               "type": "address"
+            },
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "bounty",
+               "type": "uint256"
+            }
+         ],
+         "name": "TaskRewarded",
+         "type": "event"
+      },
+      {
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": false,
+               "internalType": "uint256",
+               "name": "taskId",
+               "type": "uint256"
+            },
+            {
+               "indexed": false,
+               "internalType": "address",
+               "name": "submitter",
+               "type": "address"
+            }
+         ],
+         "name": "TaskSubmission",
+         "type": "event"
+      },
+      {
+         "anonymous": false,
+         "inputs": [
+            {
+               "indexed": false,
+               "internalType": "address",
+               "name": "account",
+               "type": "address"
+            }
+         ],
+         "name": "Unpaused",
+         "type": "event"
+      },
+      {
+         "inputs": [],
+         "name": "ADMIN_ROLE",
+         "outputs": [
+            {
+               "internalType": "bytes32",
+               "name": "",
+               "type": "bytes32"
+            }
+         ],
+         "stateMutability": "view",
+         "type": "function"
+      },
+      {
+         "inputs": [],
+         "name": "DEFAULT_ADMIN_ROLE",
+         "outputs": [
+            {
+               "internalType": "bytes32",
+               "name": "",
+               "type": "bytes32"
+            }
+         ],
+         "stateMutability": "view",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "uint256",
+               "name": "_gigId",
+               "type": "uint256"
+            }
+         ],
+         "name": "approveGig",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+      },
+      {
+         "inputs": [],
+         "name": "buyerFeePercentage",
+         "outputs": [
+            {
+               "internalType": "uint256",
+               "name": "",
+               "type": "uint256"
+            }
+         ],
+         "stateMutability": "view",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "uint256",
+               "name": "_gigId",
+               "type": "uint256"
+            }
+         ],
+         "name": "claimPayment",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "uint256",
+               "name": "_gigId",
+               "type": "uint256"
+            }
+         ],
+         "name": "claimRefund",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "uint256",
+               "name": "_gigId",
+               "type": "uint256"
+            }
+         ],
+         "name": "closeRevision",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "uint256",
+               "name": "_gigId",
+               "type": "uint256"
+            }
+         ],
+         "name": "completeGig",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "address",
+               "name": "_seller",
+               "type": "address"
+            },
+            {
+               "internalType": "uint256",
+               "name": "_deadline",
+               "type": "uint256"
+            },
+            {
+               "internalType": "uint256",
+               "name": "_revisionCount",
+               "type": "uint256"
+            }
+         ],
+         "name": "createGig",
+         "outputs": [],
+         "stateMutability": "payable",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "uint256",
+               "name": "_bounty",
+               "type": "uint256"
+            }
+         ],
+         "name": "createOpenTask",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "bytes32",
+               "name": "role",
+               "type": "bytes32"
+            }
+         ],
+         "name": "getRoleAdmin",
+         "outputs": [
+            {
+               "internalType": "bytes32",
+               "name": "",
+               "type": "bytes32"
+            }
+         ],
+         "stateMutability": "view",
+         "type": "function"
+      },
+      {
+         "inputs": [],
+         "name": "gigCount",
+         "outputs": [
+            {
+               "internalType": "uint256",
+               "name": "",
+               "type": "uint256"
+            }
+         ],
+         "stateMutability": "view",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "uint256",
+               "name": "",
+               "type": "uint256"
+            }
+         ],
+         "name": "gigs",
+         "outputs": [
+            {
+               "internalType": "uint256",
+               "name": "gigId",
+               "type": "uint256"
+            },
+            {
+               "internalType": "address",
+               "name": "buyer",
+               "type": "address"
+            },
+            {
+               "internalType": "address",
+               "name": "seller",
+               "type": "address"
+            },
+            {
+               "internalType": "uint256",
+               "name": "amount",
+               "type": "uint256"
+            },
+            {
+               "internalType": "bool",
+               "name": "buyerIsNFTHolder",
+               "type": "bool"
+            },
+            {
+               "internalType": "bool",
+               "name": "isPaid",
+               "type": "bool"
+            },
+            {
+               "internalType": "bool",
+               "name": "isDisputed",
+               "type": "bool"
+            },
+            {
+               "internalType": "uint256",
+               "name": "deadline",
+               "type": "uint256"
+            },
+            {
+               "internalType": "uint256",
+               "name": "revisionCount",
+               "type": "uint256"
+            },
+            {
+               "internalType": "uint256",
+               "name": "revisionRequests",
+               "type": "uint256"
+            },
+            {
+               "internalType": "uint256",
+               "name": "lastRevisionRequestTime",
+               "type": "uint256"
+            },
+            {
+               "internalType": "bool",
+               "name": "openForRevision",
+               "type": "bool"
+            },
+            {
+               "internalType": "bool",
+               "name": "isApproved",
+               "type": "bool"
+            }
+         ],
+         "stateMutability": "view",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "bytes32",
+               "name": "role",
+               "type": "bytes32"
+            },
+            {
+               "internalType": "address",
+               "name": "account",
+               "type": "address"
+            }
+         ],
+         "name": "grantRole",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "bytes32",
+               "name": "role",
+               "type": "bytes32"
+            },
+            {
+               "internalType": "address",
+               "name": "account",
+               "type": "address"
+            }
+         ],
+         "name": "hasRole",
+         "outputs": [
+            {
+               "internalType": "bool",
+               "name": "",
+               "type": "bool"
+            }
+         ],
+         "stateMutability": "view",
+         "type": "function"
+      },
+      {
+         "inputs": [],
+         "name": "nftContract",
+         "outputs": [
+            {
+               "internalType": "contract INFT",
+               "name": "",
+               "type": "address"
+            }
+         ],
+         "stateMutability": "view",
+         "type": "function"
+      },
+      {
+         "inputs": [],
+         "name": "openTaskCount",
+         "outputs": [
+            {
+               "internalType": "uint256",
+               "name": "",
+               "type": "uint256"
+            }
+         ],
+         "stateMutability": "view",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "uint256",
+               "name": "",
+               "type": "uint256"
+            }
+         ],
+         "name": "openTasks",
+         "outputs": [
+            {
+               "internalType": "uint256",
+               "name": "taskId",
+               "type": "uint256"
+            },
+            {
+               "internalType": "address",
+               "name": "company",
+               "type": "address"
+            },
+            {
+               "internalType": "uint256",
+               "name": "bounty",
+               "type": "uint256"
+            },
+            {
+               "internalType": "bool",
+               "name": "isPaid",
+               "type": "bool"
+            }
+         ],
+         "stateMutability": "view",
+         "type": "function"
+      },
+      {
+         "inputs": [],
+         "name": "paused",
+         "outputs": [
+            {
+               "internalType": "bool",
+               "name": "",
+               "type": "bool"
+            }
+         ],
+         "stateMutability": "view",
+         "type": "function"
+      },
+      {
+         "inputs": [],
+         "name": "platform",
+         "outputs": [
+            {
+               "internalType": "address",
+               "name": "",
+               "type": "address"
+            }
+         ],
+         "stateMutability": "view",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "uint256",
+               "name": "_gigId",
+               "type": "uint256"
+            }
+         ],
+         "name": "raiseDispute",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "uint256",
+               "name": "_gigId",
+               "type": "uint256"
+            }
+         ],
+         "name": "rejectGig",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "bytes32",
+               "name": "role",
+               "type": "bytes32"
+            },
+            {
+               "internalType": "address",
+               "name": "callerConfirmation",
+               "type": "address"
+            }
+         ],
+         "name": "renounceRole",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "uint256",
+               "name": "_gigId",
+               "type": "uint256"
+            }
+         ],
+         "name": "requestRevision",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "uint256",
+               "name": "_gigId",
+               "type": "uint256"
+            },
+            {
+               "internalType": "uint256",
+               "name": "_buyerAmount",
+               "type": "uint256"
+            },
+            {
+               "internalType": "uint256",
+               "name": "_sellerAmount",
+               "type": "uint256"
+            }
+         ],
+         "name": "resolveDispute",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "bytes32",
+               "name": "role",
+               "type": "bytes32"
+            },
+            {
+               "internalType": "address",
+               "name": "account",
+               "type": "address"
+            }
+         ],
+         "name": "revokeRole",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "uint256",
+               "name": "_taskId",
+               "type": "uint256"
+            },
+            {
+               "internalType": "address",
+               "name": "_winner",
+               "type": "address"
+            }
+         ],
+         "name": "rewardTask",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+      },
+      {
+         "inputs": [],
+         "name": "sellerFeePercentage",
+         "outputs": [
+            {
+               "internalType": "uint256",
+               "name": "",
+               "type": "uint256"
+            }
+         ],
+         "stateMutability": "view",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "uint256",
+               "name": "_percentage",
+               "type": "uint256"
+            }
+         ],
+         "name": "setBuyerFeePercentage",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "address",
+               "name": "_platform",
+               "type": "address"
+            }
+         ],
+         "name": "setPlatform",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "uint256",
+               "name": "_percentage",
+               "type": "uint256"
+            }
+         ],
+         "name": "setSellerFeePercentage",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "uint256",
+               "name": "_taskId",
+               "type": "uint256"
+            }
+         ],
+         "name": "submitToTask",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "bytes4",
+               "name": "interfaceId",
+               "type": "bytes4"
+            }
+         ],
+         "name": "supportsInterface",
+         "outputs": [
+            {
+               "internalType": "bool",
+               "name": "",
+               "type": "bool"
+            }
+         ],
+         "stateMutability": "view",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "address",
+               "name": "_nftContract",
+               "type": "address"
+            }
+         ],
+         "name": "updateNFTContract",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+      },
+      {
+         "inputs": [
+            {
+               "internalType": "uint256",
+               "name": "_gigId",
+               "type": "uint256"
+            }
+         ],
+         "name": "withdrawGig",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+      }
+   ]
+}

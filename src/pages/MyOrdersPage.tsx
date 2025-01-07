@@ -366,9 +366,9 @@ const Row = ({
 
       console.log("Calling approveGig with BlockchainGigId: ", BlockchainGigId);
 
-      const tx = await contract.approveGig(BlockchainGigId);
-      const receipt = await tx.wait();
-      console.log("Transaction Receipt: ", receipt);
+      // const tx = await contract.approveGig(BlockchainGigId);
+      // const receipt = await tx.wait();
+      // console.log("Transaction Receipt: ", receipt);
 
       console.log("Calling backend API to update gig approval status");
       const apiResponse = await axiosPrivate.patch(
@@ -444,7 +444,7 @@ const Row = ({
     }
     if (status === "revision") {
       if (user?.accountType === "FREELANCER") {
-        return <Button>Re-deliver Work</Button>;
+        return <Button onClick={()=>{navigate(`/order/${_id}`);}}>Re-deliver Work</Button>;
       } else if (user?.accountType === "CLIENT") {
         return <Badge>Revision Requested</Badge>;
       }

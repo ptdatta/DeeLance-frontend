@@ -46,6 +46,7 @@ function Order() {
   const [revisionReason, setRevisionReason] = useState("");
   const [disputeReason, setDisputeReason] = useState("");
   const [isSubmittingDispute, setIsSubmittingDispute] = useState(false);
+  const [orderDelivered, setOrderDelivered] = useState(false);
 
   const { data: user } = useQuery<IUser>({ queryKey: ["user"] });
 
@@ -68,6 +69,12 @@ function Order() {
     },
     enabled: !!orderResponse?.data?.gigId,
   });
+
+  useEffect(() => {
+    if (orderResponse?.data?.status === "delivered") {
+      setOrderDelivered(true);
+    }
+  }, orderResponse);
 
   const isFreelancer = orderResponse?.data?.freelancerId === user?._id;
   const isClient = orderResponse?.data?.clientId === user?._id;
@@ -98,9 +105,14 @@ function Order() {
           <Button
             className="w-full h-11 flex items-center justify-center gap-2 bg-green-800 hover:bg-green-700"
             onClick={handleAcceptDelivery}
-            disabled={isAccepting}
+            disabled={isAccepting || orderDelivered}
           >
-            {isAccepting ? (
+            {orderDelivered ? (
+              <>
+                <FaCheckCircle />
+                Delivery Accepted
+              </>
+            ) : isAccepting ? (
               <Loader.CircularSnake className="w-5 h-5" />
             ) : (
               <>
@@ -284,7 +296,7 @@ function Order() {
   const { mutate: acceptDelivery, isLoading: isAccepting } = useMutation({
     mutationFn: async () => {
       console.log("Accepting delivery for order:", orderId);
-      const response = await axiosPrivate.post(
+      const response = await axiosPrivate.patch(
         `/order/${orderId}/orderDelivered`
       );
       console.log("Order acceptance response:", response.data);
@@ -301,6 +313,7 @@ function Order() {
           color: "black",
         },
       });
+      setOrderDelivered(true);
 
       queryClient.invalidateQueries(["order", orderId]);
     },

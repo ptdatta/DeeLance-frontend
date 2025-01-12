@@ -366,9 +366,9 @@ const Row = ({
 
       console.log("Calling approveGig with BlockchainGigId: ", BlockchainGigId);
 
-      // const tx = await contract.approveGig(BlockchainGigId);
-      // const receipt = await tx.wait();
-      // console.log("Transaction Receipt: ", receipt);
+      const tx = await contract.approveGig(BlockchainGigId);
+      const receipt = await tx.wait();
+      console.log("Transaction Receipt: ", receipt);
 
       console.log("Calling backend API to update gig approval status");
       const apiResponse = await axiosPrivate.patch(
